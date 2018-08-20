@@ -285,9 +285,9 @@ desired effect
             <!-- Main content -->
             <section class="content container-fluid">
                 <h2>Bảng</h2>
-                <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+                
                 <button type="button" class="btn btn-primary">Thêm mới</button>
-                <table class="table">
+                <table class="table table-hover table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Tên</th>
@@ -295,22 +295,8 @@ desired effect
                             <th>Email</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>john@example.com</td>
-                        </tr>
-                        <tr>
-                            <td>Mary</td>
-                            <td>Moe</td>
-                            <td>mary@example.com</td>
-                        </tr>
-                        <tr>
-                            <td>July</td>
-                            <td>Dooley</td>
-                            <td>july@example.com</td>
-                        </tr>
+                    <tbody class="table-body">
+                        
                     </tbody>
                 </table>
             </section>
@@ -406,6 +392,11 @@ desired effect
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
+    <script src="dist/js/common.js"></script>
+    <script>
+        getData(); 
+    </script>
+    <!-- Nhúng file để lấy các hàm -->
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
