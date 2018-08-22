@@ -40,6 +40,12 @@ function getData(){
                                                 >
                                                     <i class="fa fa-remove"></i>
                                                 </button>
+                                                <a 
+                                                    href="./update.html?user-id=${result[i].id}" 
+                                                    class="btn btn-primary btn-sm update-user"
+                                                >
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
                                             </td>
                                         </tr>`;
                                         $('.table-body').append(templatestring);
@@ -143,3 +149,94 @@ $('.table-body').on('click', '.remove-user',function() {
     });
 
 });
+
+function getOneUserById(id = 0) {
+    if (id) {
+        $.ajax({
+            url: `http://5b71a13e586eb5001463a75b.mockapi.io/api-vuml/user/${id}`, // url (demo thôi éo dùng đc đâu)
+            method: "get", // phương thức: get, post, put, delete
+            dataType: "JSON", // kiểu giữ liệu trả về JSON, String, Object, ...
+            data: { // dữ liệu gửi đi tương ứng với key(xem lại postman)
+              
+            },
+            beforeSend: function(){
+                // $('.loading').removeClass('hide');
+                // setInterval(function(){
+                //     $('.loading').toggleClass('txt-red');
+                // }, 200);
+                
+                // Đoạn trong này xử lí action gì đấy trong lúc gửi dữ liệu đi mà chưa có phản hồi
+                // Ví dụ: cho cái icon xoay xoay cho đẹp
+            },
+            complete: function(){
+                // $('.loading').addClass('hide');
+                // Đoạn trong này xử lí action gì đấy sau khi đã có dữ liệu
+                // Ví dụ: tắt cái icon xoay xoay đi
+            }, 
+            success: function(result){
+                // result là cái dữ liệu đã được trả về
+                // xử lý ở đây
+                // console.log(result);
+                if (result) { // kiểm tra dữ liệu có trả về hay không
+                    $('#email').val(result.email);
+                    $('#fist_name').val(result.first_name);
+                    $('#last_name').val(result.last_name);
+                }
+            },
+            error: function(err, msg){
+                console.log(msg);
+                console.log(err);
+                // nếu lỗi thông báo ở đây
+            }
+        });
+    }
+}
+
+function actionUpdate(userId = 0) {
+    // khai báo các biến nhận dữ liệu trên form
+    var email     = $('#email').val();
+    var firstName = $('#fist_name').val();
+    var lastName  = $('#last_name').val();
+
+    if (userId) { // kiểm tra có user id 
+        $.ajax({
+            url: 'http://5b71a13e586eb5001463a75b.mockapi.io/api-vuml/user/' + userId, // cộng chuỗi url tương đương `http://5b71a13e586eb5001463a75b.mockapi.io/api-vuml/user/${userId}`
+            method: "put", // phương thức: get, post, put, delete
+            dataType: "JSON", // kiểu giữ liệu trả về JSON, String, Object, ...
+            data: { // dữ liệu gửi đi tương ứng với key(xem lại postman)
+                first_name: firstName,  
+                email: email,
+                last_name: lastName,
+            },
+            beforeSend: function(){
+                // $('.loading').removeClass('hide');
+                // setInterval(function(){
+                //     $('.loading').toggleClass('txt-red');
+                // }, 200);
+                
+                // Đoạn trong này xử lí action gì đấy trong lúc gửi dữ liệu đi mà chưa có phản hồi
+                // Ví dụ: cho cái icon xoay xoay cho đẹp
+            },
+            complete: function(){
+                // $('.loading').addClass('hide');
+                // Đoạn trong này xử lí action gì đấy sau khi đã có dữ liệu
+                // Ví dụ: tắt cái icon xoay xoay đi
+            },
+            success: function(result){
+                // result là cái dữ liệu đã được trả về
+                // xử lý ở đây
+                //console.log(result);
+                if (result) { // kiểm tra dữ liệu có trả về hay không
+                    window.location.replace('file:///D:/training-js/crud-js/starter.html'); // reload về trang chu
+                }
+            },
+            error: function(err, msg){
+                console.log(msg);
+                console.log(err);
+                // nếu lỗi thông báo ở đây
+            }
+        });
+    }
+
+ 
+}
